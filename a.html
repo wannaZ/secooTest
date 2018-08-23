@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="sider">
+			<ul class="siders">
+				
+				<a href="javascript:;" id="btn_l"></a>
+				<a href="javascript:;" id="btn_r"></a>
+				<!-- <li style="z-index: 1 ";><img src="img/1.jpg" /></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/6.jpg"/></li> -->
+			</ul>
+
+			<ul class="bottom">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>			
+	</div>
+		var c = 0;
+		bangding();
+		function bangding(){
+			$(".siders li").eq(c).show().siblings('li').hide();
+			$(".bottom li").eq(c).css({"background":"red"}).siblings('li').css({"background":"#999"});
+		}
+		//自动轮播函数
+		function zidong(){
+			c++;
+			c=c==5?0:c;
+			bangding();
+		}
+		var dong = setInterval(zidong,2500);
+		//鼠标事件，鼠标移入停止动画 移出继续
+		$(".siders").mouseover(function(){
+			clearInterval(dong);
+		})
+		$(".siders").mouseout(function(){
+			dong = setInterval(zidong,2500);
+		})
+		//鼠标事件，点击切换上一张
+		$("#btn_l").click(function(){
+			c--;
+			c=c==-1?4:c;
+			bangding();
+		}).mousemove(function(){
+            $(this).css({'background-position':'0 -61px'})
+        }).mouseout(function(){
+            $(this).css({'background-position':'0 0'})
+        })
+        //鼠标事件，点击切换下一张
+        $('#btn_r').click(function(){
+            c++;
+            c=c==5?0:c;
+            bangding();
+        }).mousemove(function(){
+            $(this).css({'background-position':'-50px -61px'})
+        }).mouseout(function(){
+            $(this).css({'background-position':'-50px 0'})
+        })
+        //鼠标事件，点击小圆点实现切换图片
+        $('.bottom li').mouseover(function(){
+            c = $(this).index();
+            console.log(c);
+            bangding();
+        })
+	</body>
+</html>
